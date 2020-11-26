@@ -9,7 +9,7 @@ int main() {
     long long K;
     cin >> K;
 
-    int ans = 7;
+    int ans = 7 % K;
     for (int i = 0; i < K; ++i) {
       if (ans == 0) {
         cout << i + 1 << endl;

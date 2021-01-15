@@ -6,36 +6,33 @@
 #include <iomanip>
 using namespace std;
 
-int gcd(int x, int y) { return (x % y)? gcd(y, x % y): y; }
-
+/**
+ * 白のマスの中で一番小さいものがはんことなる
+ * そのハンコで空白のマスを割って、かつあまりが出たら＋１するというロジック
+ */
 int main() {
-    int N, M;
+    long long N, M;
     cin >> N >> M;
-    vector <int> v(M,0);
-    for (int i = 0; i < M; ++i) cin >> v[i];
-    sort(v.begin(), v.end());
-    vector <int> d(M+1,0);
-    d[0] = v[0] - 1;
-    for (int i = 1; i < M; ++i) {
-        int x = v[i] - v[0] - 1;
-        if (x != 0) d[i] = x;
-    }
-    d[M] = N - v[M-1];
-    int ans = d[0];
-    for (int i = 0; i < d.size(); ++i) cout << d[i] << endl;
-    for (int i = 1; i < d.size(); ++i) {
-        if (ans == 0) {
-            ans = d[i];
-            continue;
-        }
-        ans = gcd(ans, d[i]);
-    }
-    sort(d.begin(), d.end());
-    int k = d[0];
-    if (d[0]==0) {
-        k = d[1];
-    }
 
-    cout  << ans << endl;
+    vector <long long> v(M,0);
+    for (int i = 0; i < M; ++i) cin >> v[i];
+    sort(v.begin(), v.end()); // -1するときオーバーしちゃうため。
+    v.insert(v.begin(), 0);
+    v.push_back(N+1);
+    vector <long long> d;
+    // 空白のマスをdに入れる
+    long long h = N;
+    for (int i = 0; i + 1 < v.size(); ++i) {
+        long long x = v[i+1] - v[i] - 1;
+        if (x > 0) {
+            d.push_back(x);
+            h = min(h,x);
+        }
+    }
+    long long ans = 0;
+    for (auto len : d) {
+        ans += (len + h - 1)/h;
+    }
+    cout << ans << endl;
     return 0;
 }

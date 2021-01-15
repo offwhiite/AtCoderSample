@@ -15,6 +15,7 @@ vector <int> getPrimeNumberList(int N) {
         spf[i] = i;
     }
       
+    spf.erase(spf.begin());spf.erase(spf.begin());
 
     // エラトステネスの篩でNまでの素数を計算する
     int squrtN = sqrt(N);

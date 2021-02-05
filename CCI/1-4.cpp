@@ -41,11 +41,11 @@ int main() {
         m[N[i]]++;
     }
 
-    int oneCount = 0;
+    bool oneCount = false;
     for (auto a : m) {
         cout << "f = " << a.first << " s = " << a.second << endl;
         if (a.second % 2 == 0) continue;
-        else if(a.second % 2 == 1) oneCount++;
+        else if(a.second % 2 == 1 && oneCount != false) oneCount = true;
         else { cout << "False" << endl; return 0; }
     }
     cout << "True" << endl;

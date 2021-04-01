@@ -42,7 +42,6 @@ vector<int> createArrayWithMissing(int size) {
     return m;
 }
 
-
 int main() {
     vector<int> v = createArrayWithMissing(100000);
     cout << solution(v) << endl;

@@ -1,10 +1,11 @@
-using namespace std;
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <math.h>
 #include <iomanip>
 #include <queue>
+using namespace std;
 
 /**
  * 問題

@@ -42,6 +42,11 @@ int main() {
     std::stringstream ss;
     ss << s2 << s2;
 
+    if (s1.length() != s2.length()) {
+        cout << false << endl;
+        return 0;
+    }
+    
     if (isSubstring(s1,ss.str())) {
         cout << "true";
     } else cout << "false";

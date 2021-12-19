@@ -6,34 +6,37 @@
 #include <queue>
 using namespace std;
 
+void displayData(int n) {
+    vector<int> bit = vector<int>();
+    while(n!=0) {
+        int x = n % 2;
+        if (x == 0) {
+            bit.push_back(0);
+        } else {
+            bit.push_back(1);
+        }
+        n /= 2;
+    }
+    for (int i = 0; i < bit.size(); ++i) {
+        cout << bit[i];
+    }
+    cout << " ";
+}
+
 int main() {
     for (int i = 0; i <= 16; ++i) {
         int N = i;
-        vector<int> bit = vector<int>();
-        while(N!=0) {
-            int x = N % 2;
-            if (x == 0) {
-                bit.push_back(0);
-            } else {
-                bit.push_back(1);
-            }
-            N /= 2;
-        }
-        for (int i = 0; i < bit.size(); ++i) {
-            cout << bit[i];
-        }
-        cout << " ";
-
-        int maxCount = 0;
+        displayData(N);
+        int maxCount = 1; // 一番小さくて1
         int zeroCount = 0;
         int sequenseCount = 0;
         int zeroPosition = 0;
-        for (int i = 0; i < bit.size(); ++i) {
-            if (bit[i] == 0 && zeroCount == 0) {
+        while (N != 0) {
+            if ((N & 1) == 0 && zeroCount == 0) {
                 zeroCount++;
                 sequenseCount++;
                 zeroPosition = i;
-            } else if (bit[i] == 0 && zeroCount == 1) {
+            } else if ((N & 1) == 0 && zeroCount == 1) {
                 zeroCount = 1;
                 maxCount = max(maxCount, sequenseCount);
                 sequenseCount = i - zeroPosition;
@@ -41,6 +44,7 @@ int main() {
             } else {
                 sequenseCount++;
             }
+            N >>= 1;
         }
         maxCount = max(maxCount, sequenseCount);
         cout << maxCount << endl;
